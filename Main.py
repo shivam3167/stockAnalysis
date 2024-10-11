@@ -4,12 +4,16 @@ import numpy as np
 import yfinance as yf
 import plotly.express as px
 import matplotlib.pyplot as plt
+import datetime
+
 
 st.title("Stock Market Analysis & Prediction ")
 stock = st.sidebar.text_input("Stock Name",value='GOOG')
 
-start_date = st.sidebar.date_input("Start_date",format="DD/MM/YYYY")
-end_date = st.sidebar.date_input("End_date",format="DD/MM/YYYY")
+default_date = datetime.date(2023 , 1 ,1)
+
+start_date = st.sidebar.date_input("Start_date", value = default_date)
+end_date = st.sidebar.date_input("End_date")
 
 data = yf.download(stock , start = start_date , end = end_date)
 
@@ -150,36 +154,36 @@ with over_view :
     """,unsafe_allow_html=True)
 
 
-# from alpha_vantage.fundamentaldata import FundamentalData
+from alpha_vantage.fundamentaldata import FundamentalData
 
-# with fundamental_data : 
+with fundamental_data : 
 
-#     key = 'SO9XJDF710RLGACR'
+    key = 'SO9XJDF710RLGACR'
 
-#     #ANNUAL BALANCE SHEET
+    #ANNUAL BALANCE SHEET
 
-#     fd = FundamentalData(key,output_format = 'pandas')
-#     st.subheader('Balance Sheet')
-#     balance_sheet = fd.get_balance_sheet_annual(stock)[0]
-#     bs = balance_sheet.T[2:]
-#     bs.columns = list(balance_sheet.T.iloc[0])
-#     st.write(bs)
+    fd = FundamentalData(key,output_format = 'pandas')
+    st.subheader('Balance Sheet')
+    balance_sheet = fd.get_balance_sheet_annual(stock)[0]
+    bs = balance_sheet.T[2:]
+    bs.columns = list(balance_sheet.T.iloc[0])
+    st.write(bs)
 
-#     #ANNUAL INCOME STATEMENT
+    #ANNUAL INCOME STATEMENT
 
-#     st.subheader('Income Statement')
-#     income_statement = fd.get_income_statement_annual(stock)[0]
-#     insc = income_statement.T[2:]
-#     insc.columns = list(income_statement.T.iloc[0])
-#     st.write(insc)
+    st.subheader('Income Statement')
+    income_statement = fd.get_income_statement_annual(stock)[0]
+    insc = income_statement.T[2:]
+    insc.columns = list(income_statement.T.iloc[0])
+    st.write(insc)
 
-#     #CASH FLOW STATEMENT
+    #CASH FLOW STATEMENT
 
-#     st.subheader('Cash Flow Statement')
-#     cash_flow = fd.get_cash_flow_annual(stock)[0]
-#     cashF = cash_flow.T[2:]
-#     cashF.columns = list(cash_flow.T.iloc[0])
-#     st.write(cashF)
+    st.subheader('Cash Flow Statement')
+    cash_flow = fd.get_cash_flow_annual(stock)[0]
+    cashF = cash_flow.T[2:]
+    cashF.columns = list(cash_flow.T.iloc[0])
+    st.write(cashF)
 
 
 with technical_analysis :
