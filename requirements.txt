@@ -6,3 +6,4 @@ stack-data==0.6.3
 stocknews==0.9.11
 streamlit==1.39.0
 yfinance==0.2.44
+alpha_vantage==3.0.0
